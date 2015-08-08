@@ -72,13 +72,17 @@ describe('Org', function () {
         .get('/org/' + name)
         .reply(200, {'name':'bigco','description':'','resource':{},'created':'2015-06-19T23:35:42.659Z','updated':'2015-06-19T23:35:42.659Z','deleted':null})
         .get('/org/' + name + '/user')
-        .reply(200, {'count':1,'items':[fixtures.users.bigcoadmin]});
+        .reply(200, {'count':1,'items':[fixtures.users.bigcoadmin]})
+        .get('/org/' + name + '/package')
+        .reply(200, [fixtures.packages.fake]);
+
 
       Org('betty').get(name, function (err, org) {
         orgMocks.done();
         expect(err).to.be.null();
-        expect(org.users[0].name).to.equal('bob');
+        expect(org.users.items[0].name).to.equal('bob');
         expect(org.info.name).to.equal('bigco');
+        expect(org.packages[0].name).to.equal('fake');
         expect(org.deleted).to.be.undefined();
         done();
       });
@@ -91,6 +95,8 @@ describe('Org', function () {
         .get('/org/' + name)
         .reply(404, 'not found')
         .get('/org/' + name + '/user')
+        .reply(404, 'not found')
+        .get('/org/' + name + '/package')
         .reply(404, 'not found');
 
       Org('betty').get(name, function (err, org) {
