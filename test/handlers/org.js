@@ -386,7 +386,9 @@ describe('updating an org', function () {
           .get("/org/bigco")
           .reply(200, fixtures.orgs.bigco)
           .get("/org/bigco/user")
-          .reply(200, fixtures.orgs.bigcoAddedUsers);
+          .reply(200, fixtures.orgs.bigcoAddedUsers)
+          .get("/org/bigco/package")
+          .reply(200, fixtures.packages.fake);
 
         var options = {
           url: "/org/bigco",
@@ -464,7 +466,9 @@ describe('updating an org', function () {
           .get("/org/bigco")
           .reply(200, fixtures.orgs.bigco)
           .get("/org/bigco/user")
-          .reply(200, fixtures.orgs.bigcoAddedUsers);
+          .reply(200, fixtures.orgs.bigcoAddedUsers)
+          .get("/org/bigco/package")
+          .reply(200, fixtures.packages.fake);
 
         var options = {
           url: "/org/bigco",

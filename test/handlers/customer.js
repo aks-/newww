@@ -641,7 +641,9 @@ describe("subscribing to an org", function () {
         .get("/org/boomer")
         .reply(200, {"name":"boomer","description":"","resource":{},"created":"2015-07-10T20:29:37.816Z","updated":"2015-07-10T21:07:16.799Z","deleted":null})
         .get("/org/boomer/user")
-        .reply(200, {"count":1,"items":[fixtures.users.bob]});
+        .reply(200, {"count":1,"items":[fixtures.users.bob]})
+        .get("/org/boomer/package")
+        .reply(200, {"count":1,"items":[fixtures.packages.fake]});
 
       var customerMock = nock("https://license-api-example.com")
         .get("/customer/bob/stripe")
