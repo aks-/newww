@@ -128,6 +128,9 @@ User.prototype.fetchFromUserACL = function fetchFromUserACL(name, callback) {
 User.prototype.fetchCustomer = function fetchCustomer(name, callback) {
   var licenseAPI = new LicenseAPI(name);
   licenseAPI.get(function(err, customer) {
+    if (err) {
+      callback(err);
+    }
     return callback(null, customer);
   });
 };
@@ -242,7 +245,10 @@ User.prototype.getPackages = function(name, page, callback) {
 
       return resolve(body);
     });
-  }).nodeify(callback);
+  }).nodeify(callback)
+  .catch(function(err) {
+    return Promise.reject(err);
+  });
 };
 
 User.prototype.getStars = function(name, callback) {
