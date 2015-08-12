@@ -129,7 +129,7 @@ User.prototype.fetchCustomer = function fetchCustomer(name, callback) {
   var licenseAPI = new LicenseAPI(name);
   licenseAPI.get(function(err, customer) {
     if (err) {
-      callback(err);
+      return callback(err);
     }
     return callback(null, customer);
   });
