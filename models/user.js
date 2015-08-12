@@ -245,11 +245,7 @@ User.prototype.getPackages = function(name, page, callback) {
 
       return resolve(body);
     });
-  }).nodeify(callback)
-  .catch(function(err) {
-    console.log(err);
-    return Promise.reject(err);
-  });
+  }).nodeify(callback);
 };
 
 User.prototype.getStars = function(name, callback) {
