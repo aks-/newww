@@ -247,6 +247,7 @@ User.prototype.getPackages = function(name, page, callback) {
     });
   }).nodeify(callback)
   .catch(function(err) {
+    console.log(err);
     return Promise.reject(err);
   });
 };
